@@ -135,7 +135,7 @@ class ContactsViewController: BasicViewController, UITableViewDataSource, UITabl
     }
     
     
-    //MARK: Table View Data Source and Delegate methods
+    //MARK: Table View Data Source and Delegate Functions
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {

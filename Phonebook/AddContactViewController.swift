@@ -12,21 +12,23 @@ class AddContactViewController: ContactActionsViewController, UITextFieldDelegat
     
     //MARK: Variables
     
-    private var chosenCountry               : Country?
+    private var chosenCountry                   : Country?
     
     
     //MARK: Outlets
     
-    @IBOutlet weak var textField_FirstName  : UITextField!
-    @IBOutlet weak var textField_LastName   : UITextField!
-    @IBOutlet weak var textField_PhoneNumber: UITextField!
-    @IBOutlet weak var textField_Email      : UITextField!
+    @IBOutlet weak var scrollView_ContactFields : UIScrollView!
     
-    @IBOutlet weak var label_CountryCode:     UILabel!
+    @IBOutlet weak var textField_FirstName      : UITextField!
+    @IBOutlet weak var textField_LastName       : UITextField!
+    @IBOutlet weak var textField_PhoneNumber    : UITextField!
+    @IBOutlet weak var textField_Email          : UITextField!
     
-    @IBOutlet weak var button_ChooseCountry : UIButton!
+    @IBOutlet weak var label_CountryCode        : UILabel!
     
-    @IBOutlet weak var segmentControl_Gender: UISegmentedControl!
+    @IBOutlet weak var button_ChooseCountry     : UIButton!
+    
+    @IBOutlet weak var segmentControl_Gender    : UISegmentedControl!
     
     
     //MARK: Life Cycle
@@ -41,14 +43,48 @@ class AddContactViewController: ContactActionsViewController, UITextFieldDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
+        notificationCenter.addObserver(
+            self,
+            selector : #selector(keyboardWillHide(notification:)),
+            name     : .UIKeyboardWillHide,
+            object   : nil
+        )
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        
+        var contentInset : UIEdgeInsets = self.scrollView_ContactFields.contentInset
+        contentInset.bottom = keyboardHeight
+        self.scrollView_ContactFields.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var contentInset : UIEdgeInsets = self.scrollView_ContactFields.contentInset
+        contentInset.bottom = 0
+        self.scrollView_ContactFields.contentInset = contentInset
+
     }
     
     //MARK: Navigation Functions

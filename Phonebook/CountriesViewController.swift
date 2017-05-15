@@ -51,7 +51,7 @@ class CountriesViewController: BasicViewController, UITableViewDataSource, UITab
     }
     
     
-    //MARK: Search Bar Delegate Methods
+    //MARK: Search Bar Delegate Functions
     
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String) {
@@ -82,7 +82,7 @@ class CountriesViewController: BasicViewController, UITableViewDataSource, UITab
     }
     
     
-    //MARK: Table View DataSource and Delegate methods
+    //MARK: Table View DataSource and Delegate Functions
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {

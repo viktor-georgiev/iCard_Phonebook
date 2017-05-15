@@ -209,6 +209,7 @@
                     <connections>
                         <outlet property="button_ChooseCountry" destination="pRv-aO-MhO" id="xeG-7R-cQs"/>
                         <outlet property="label_CountryCode" destination="jh2-Gd-NVO" id="UAA-rP-6Wp"/>
+                        <outlet property="scrollView_ContactFields" destination="cWr-xM-plK" id="6KY-9Q-NWK"/>
                         <outlet property="segmentControl_Gender" destination="1Tz-YR-H27" id="Vjm-px-LNf"/>
                         <outlet property="textField_Email" destination="yFG-cV-zv7" id="hIR-f1-Vcy"/>
                         <outlet property="textField_FirstName" destination="Wwz-Fk-5k3" id="1bL-Zf-eX4"/>
@@ -646,6 +647,7 @@
                     <connections>
                         <outlet property="button_ChooseCountry" destination="bv0-SH-757" id="Sc3-Dg-d5Y"/>
                         <outlet property="label_CountryCode" destination="RFe-jA-O5U" id="Qvy-U0-IES"/>
+                        <outlet property="scrollView_ContactFields" destination="pWw-fp-yya" id="obR-mv-ECY"/>
                         <outlet property="segmentControl_Gender" destination="Iy0-Bc-Ojr" id="9oJ-gV-7ju"/>
                         <outlet property="textField_Email" destination="htY-e6-3s8" id="h49-Ru-sOr"/>
                         <outlet property="textField_FirstName" destination="DYT-FG-mgt" id="Uix-yn-yBA"/>
@@ -659,6 +661,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vdb-1w-wnG"/>
+        <segue reference="tHX-jV-3rC"/>
     </inferredMetricsTieBreakers>
 </document>

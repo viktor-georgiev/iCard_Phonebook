@@ -13,23 +13,26 @@ class EditContactViewController: ContactActionsViewController, UITextFieldDelega
     
     //MARK: Variables
     
-    var contact                             : Contact!
+    var contact                                 : Contact!
     
-    private var chosenCountry               : Country!
+    private var chosenCountry                   : Country!
     
     
     //MARK: Outlets
     
-    @IBOutlet weak var textField_FirstName  : UITextField!
-    @IBOutlet weak var textField_LastName   : UITextField!
-    @IBOutlet weak var textField_PhoneNumber: UITextField!
-    @IBOutlet weak var textField_Email      : UITextField!
+    @IBOutlet weak var scrollView_ContactFields : UIScrollView!
     
-    @IBOutlet weak var label_CountryCode    : UILabel!
     
-    @IBOutlet weak var button_ChooseCountry : UIButton!
+    @IBOutlet weak var textField_FirstName      : UITextField!
+    @IBOutlet weak var textField_LastName       : UITextField!
+    @IBOutlet weak var textField_PhoneNumber    : UITextField!
+    @IBOutlet weak var textField_Email          : UITextField!
     
-    @IBOutlet weak var segmentControl_Gender: UISegmentedControl!
+    @IBOutlet weak var label_CountryCode        : UILabel!
+    
+    @IBOutlet weak var button_ChooseCountry     : UIButton!
+    
+    @IBOutlet weak var segmentControl_Gender    : UISegmentedControl!
     
     
     //MARK: Life Cycle
@@ -76,6 +79,9 @@ class EditContactViewController: ContactActionsViewController, UITextFieldDelega
         navigationItem.rightBarButtonItem = rightButton
     }
     
+    
+    //MARK: Custom Functions
+    
     func setupContent() {
         textField_FirstName.text   = contact.firstname
         textField_LastName.text    = contact.lastname
@@ -91,8 +97,20 @@ class EditContactViewController: ContactActionsViewController, UITextFieldDelega
         }
     }
     
-    func didChooseCountry(country: Country) {
-        setupCountry(country: country)
+    func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        let keyboardHeight = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
+        
+        var contentInset : UIEdgeInsets = self.scrollView_ContactFields.contentInset
+        contentInset.bottom = keyboardHeight
+        self.scrollView_ContactFields.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var contentInset : UIEdgeInsets = self.scrollView_ContactFields.contentInset
+        contentInset.bottom = 0
+        self.scrollView_ContactFields.contentInset = contentInset
+        
     }
     
     func setupCountry(country: Country) {
@@ -100,6 +118,14 @@ class EditContactViewController: ContactActionsViewController, UITextFieldDelega
         label_CountryCode.text = String.init(format: "+ %d", chosenCountry.code)
         button_ChooseCountry.setTitle(chosenCountry.name, for: .normal)
     }
+    
+    //MARK: Custom Delegate Functions
+    
+    func didChooseCountry(country: Country) {
+        setupCountry(country: country)
+    }
+    
+    //MARK: TextField Delegate Functions
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == textField_FirstName {
