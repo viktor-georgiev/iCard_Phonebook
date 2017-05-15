@@ -46,10 +46,35 @@ class EditContactViewController: ContactActionsViewController, UITextFieldDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification:)),
+            name: .UIKeyboardWillShow,
+            object: nil
+        )
+        notificationCenter.addObserver(
+            self,
+            selector : #selector(keyboardWillHide(notification:)),
+            name     : .UIKeyboardWillHide,
+            object   : nil
+        )
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(
+            self,
+            name   : .UIKeyboardWillShow,
+            object : nil)
+        
+        notificationCenter.removeObserver(
+            self,
+            name   : .UIKeyboardWillHide,
+            object : nil)
     }
     
     override func didReceiveMemoryWarning() {

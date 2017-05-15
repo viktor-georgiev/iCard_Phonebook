@@ -63,8 +63,15 @@ class AddContactViewController: ContactActionsViewController, UITextFieldDelegat
         super.viewDidDisappear(animated)
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        notificationCenter.removeObserver(
+            self,
+            name   : .UIKeyboardWillShow,
+            object : nil)
+        
+        notificationCenter.removeObserver(
+            self,
+            name   : .UIKeyboardWillHide,
+            object : nil)
     }
 
     override func didReceiveMemoryWarning() {
